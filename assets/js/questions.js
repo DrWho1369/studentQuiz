@@ -1,3 +1,5 @@
+
+
 const questions = [
     {
         question: "What is the purpose of HTML?",
@@ -36,3 +38,5 @@ const questions = [
         wrongAnswers: ["The current function", "The global object", "None of the above"],
     },
 ];
+
+export default questions;
