@@ -10,7 +10,8 @@ var questionsEl = document.querySelector('#questions')
 var timeEl = document.querySelector('#time')
 var questionTitleEl = document.querySelector('#question-title')
 var choicesEl = document.querySelector('#choices')
-
+var buttonEl = document.
+var count = 0
 // THEN a timer starts and I am presented with a question
 function start(event) {
     event.preventDefault();
@@ -30,19 +31,22 @@ function start(event) {
 }
 
 function question() {
-    questionTitleEl.textContent = questions[0].question;
+    questionTitleEl.textContent = questions[count].question;
     var choices = questions[0].choices;
     choices.forEach((choice, index) => {
         const button = document.createElement('button');
         button.textContent = choice;
+        button.id = `answer${index + 1}`
         choicesEl.appendChild(button);
     });
 
-    choicesEl.addEventListener('click', next)
+    choicesEl.addEventListener('click', compare)
 }
 
-function next() {
-    console.log("next")
+function compare() {
+    if (button.id === questions[count].correctAnswer) {
+        console.log("True")
+    }
 }
 startButtonEl.addEventListener('click', start)
 
