@@ -30,7 +30,7 @@ var initialsEl = document.querySelector('#initials')
 var currentQuestionIndex = 0;
 var secondsLeft = 30;
 var timerInterval;
-var scoreData = {}
+
 
 
 
@@ -49,7 +49,7 @@ function displayQuiz() {
     currentQuestionIndex = 0;
     secondsLeft = 30;
     timerInterval;
-    scoreData = {}
+
     startScreenEl.classList.add("hide");
     questionsEl.classList.remove("hide")
     questionsEl.classList.add("start")
@@ -155,17 +155,12 @@ function endQuiz() {
     clearInterval(timerInterval);    
 }
 
-
 function storeScore() {
-
+    var scoreData = JSON.parse(localStorage.getItem('scoreData')) || { score: [] };
     var newScore = {
         initials: initialsEl.value,
         time: timeEl.textContent
     };
-
-    if (!scoreData.hasOwnProperty("score")) {
-        scoreData.score = [];
-    }
 
     scoreData.score.push(newScore);
     var jsonString = JSON.stringify(scoreData);
