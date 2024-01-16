@@ -7,14 +7,18 @@ var startScreenEl = document.querySelector('#start-screen')
 var questionsEl = document.querySelector('#questions')
 var questionTitleEl = document.querySelector('#question-title')
 var choicesEl = document.querySelector('#choices')
-var feedbackEl = document.querySelector('#feedback')
 var endScreenEl = document.querySelector('#end-screen')
+var finalScoreEl = document.querySelector('#final-score')
+var timeEl = document.querySelector('#time')
+var submitEl = document.querySelector('#submit')
+var feedbackEl = document.querySelector('#feedback')
+var initialsEl = document.querySelector('#initials')
 
 var currentQuestionIndex = 0;
-
+let score = 0;
 
 startEl.addEventListener("click", displayQuiz)
-
+submitEl.addEventListener("click", storeScore)
 function displayQuiz() {
     // Step 1 change the CSS
     startScreenEl.classList.add("hide");
@@ -44,22 +48,26 @@ function handleButtonClick(event) {
     const correctAnswer = currentQuestion.correctAnswer;
 
     if (selectedChoice === correctAnswer) {
-        alert('correct!')
+        console.log(score)
     } else {
+        // timer = timer - 10
         // remove 5 seconds from time
     }
 
     currentQuestionIndex++;
 
-    // Display the next question (or end the quiz if there are no more questions)
-
     if (currentQuestionIndex < questions.length) {
         displayQuiz();
     } else {
-        alert('End of the quiz');
         endScreenEl.classList.remove("hide")
         endScreenEl.classList.add("start")
+        finalScoreEl.textContent = timeEl.textContent
     }
 }
 
+function storeScore() {
+    var scoreData = ("score", {initials: initialsEl.value, time: timeEl.textContent});
+    var jsonString = JSON.stringify(scoreData);
+    localStorage.setItem('scoreData', jsonString)
 
+}
