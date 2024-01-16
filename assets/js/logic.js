@@ -43,9 +43,11 @@ function beginQuestions() {
     }
     
     const buttons = choicesEl.querySelectorAll('button');
+
     buttons.forEach(button => {
         button.addEventListener('click', handleButtonClick);
     })
+    console.log(buttons)
 }
 
 function setTime() {
@@ -65,15 +67,26 @@ function setTime() {
 function handleButtonClick(event) {
     choicesEl.innerHTML = '';
     
-    const selectedChoice = event.target.dataset.choice;
+    const selectedChoice = event.target.firstChild.data[0];
+    console.log(selectedChoice)
     const currentQuestion = questions[currentQuestionIndex];
+
     const correctAnswer = currentQuestion.correctAnswer;
 
+
     if (selectedChoice === correctAnswer) {
-        console.log(score)
+        
+        const pTag = document.createElement('p');
+        pTag.textContent = 'Correct!';
+        choicesEl.insertAdjacentElement('afterend', pTag);
 
     } else {
         secondsLeft -= 5;
+
+        const pTag = document.createElement('p');
+        pTag.textContent = 'Wrong!';
+        choicesEl.insertAdjacentElement('afterend', pTag);
+
         if (secondsLeft < 0) {
             secondsLeft = 0;
             timeEl.textContent = secondsLeft;
@@ -83,7 +96,6 @@ function handleButtonClick(event) {
         }
         timeEl.style.color = 'red';
         timeEl.style.fontSize = '200%';
-        
         
         setTimeout(() => {
             timeEl.style.color = ''; 
