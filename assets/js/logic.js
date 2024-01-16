@@ -17,13 +17,7 @@ function displayQuiz() {
     startScreenEl.classList.add("hide");
     questionsEl.classList.remove("hide")
     questionsEl.classList.add("start")
-
-    
-
-    // Now pull in the first question from questions and iterate over each one whilst count is less than 
-    // do {
-        
-    
+ 
     var currentQuestion = questions[currentQuestionIndex];
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices
@@ -34,6 +28,26 @@ function displayQuiz() {
         choicesEl.insertAdjacentHTML('beforeend', buttonHTML);
     }
     
-    // } while (count < questions.length);
+    const buttons = questionElement.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener('click', handleButtonClick);
+    })
 }
 
+function handleButtonClick(event) {
+    const selectedChoice = event.target.dataset.choice;
+    const currentQuetion = questions[currentQuestionIndex];
+    const correctAnswer = currentQuestion.correctAnswer;
+    // You can add your logic based on the selected choice if needed
+    // For example, check if it's the correct answer
+    if (selectedChoice ===)
+    // Move to the next question
+    currentQuestionIndex++;
+
+    // Display the next question (or end the quiz if there are no more questions)
+    if (currentQuestionIndex < questions.length) {
+        displayQuestion();
+    } else {
+        alert('End of the quiz');
+    }
+}
