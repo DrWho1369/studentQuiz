@@ -32,13 +32,13 @@ Code Quiz is a web application that provides a timed quiz on JavaScript fundamen
 1. Clone the repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/code-quiz.git
+   git clone git@github.com:DrWho1369/studentQuiz.git
    ```
 
 2. Navigate to the project directory:
 
    ```bash
-   cd code-quiz
+   cd studentQuiz
    ```
 
 3. Open the `index.html` file in your preferred web browser.
@@ -57,7 +57,7 @@ Code Quiz is a web application that provides a timed quiz on JavaScript fundamen
 
 ## Credits
 
-This project was developed as part of the web development curriculum. Special thanks to the instructors and fellow learners for their contributions.
+This project was developed as part of the EdX web development curriculum. Special thanks to the instructors for their guidance.
 
 ## License
 
