@@ -46,7 +46,10 @@ submitEl.addEventListener("click", storeScore)
 // Define Functions For Program
 
 function displayQuiz() {
-
+    currentQuestionIndex = 0;
+    secondsLeft = 30;
+    timerInterval;
+    scoreData = {}
     startScreenEl.classList.add("hide");
     questionsEl.classList.remove("hide")
     questionsEl.classList.add("start")
@@ -147,7 +150,7 @@ function endQuiz() {
     questionsEl.classList.add("hide");
     endScreenEl.classList.remove("hide");
     endScreenEl.classList.add("start");
-
+    feedbackEl.classList.add("hide")
     finalScoreEl.textContent = timeEl.textContent;
     clearInterval(timerInterval);    
 }
