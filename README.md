@@ -38,7 +38,7 @@ Code Quiz is a web application that provides a timed quiz on JavaScript fundamen
 2. Navigate to the project directory:
 
    ```bash
-   cd code-quiz
+   cd studentQuiz
    ```
 
 3. Open the `index.html` file in your preferred web browser.
@@ -57,7 +57,7 @@ Code Quiz is a web application that provides a timed quiz on JavaScript fundamen
 
 ## Credits
 
-This project was developed as part of the web development curriculum. Special thanks to the instructors for their guidance.
+This project was developed as part of the EdX web development curriculum. Special thanks to the instructors for their guidance.
 
 ## License
 
