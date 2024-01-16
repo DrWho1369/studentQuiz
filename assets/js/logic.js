@@ -15,8 +15,10 @@ var feedbackEl = document.querySelector('#feedback')
 var initialsEl = document.querySelector('#initials')
 
 var currentQuestionIndex = 0;
-var secondsLeft = 60;
+var secondsLeft = 30;
 var timerInterval;
+var scoreData = {}
+
 startEl.addEventListener("click", displayQuiz)
 submitEl.addEventListener("click", storeScore)
 
@@ -68,8 +70,11 @@ function handleButtonClick(event) {
     if (selectedChoice === correctAnswer) {
         console.log(score)
     } else {
-        // timer = timer - 10
-        // remove 5 seconds from time
+        secondsLeft -= 5;
+
+        if (secondsLeft < 0) {
+            secondsLeft = 0;
+        }
     }
 
     currentQuestionIndex++;
@@ -82,6 +87,7 @@ function handleButtonClick(event) {
 }
 
 function endQuiz() {
+    questionsEl.classList.add("hide")
     endScreenEl.classList.remove("hide")
     endScreenEl.classList.add("start")
     finalScoreEl.textContent = timeEl.textContent
@@ -89,7 +95,14 @@ function endQuiz() {
 }
 
 function storeScore() {
-    var scoreData = ("score", {initials: initialsEl.value, time: timeEl.textContent});
+    var newScore = {
+        initials: initialsEl.value,
+        time: timeEl.textContent
+    };
+    if (!scoreData.hasOwnProperty("score")) {
+        scoreData.score = [];
+    }
+    scoreData.score.push(newScore);
     var jsonString = JSON.stringify(scoreData);
     localStorage.setItem('scoreData', jsonString)
 

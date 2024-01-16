@@ -4,15 +4,19 @@ console.log(storedScoreData)
 var highscoresEl = document.querySelector('#highscores');
 var clearEl = document.querySelector('#clear')
 
-if (storedScoreData) {
-    var storedInitials = storedScoreData.initials;
-    var storedTime = storedScoreData.time;
+if (storedScoreData && storedScoreData.score) {
 
-    var listItem = document.createElement('ol');
-    listItem.textContent = `${storedInitials}: ${storedTime}`;
+    for (var i = 0; i < storedScoreData.score.length; i++) {
+        var currentScore = storedScoreData.score[i];
 
-    highscoresEl.appendChild(listItem);
+        var initials = currentScore.initials;
+        var time = currentScore.time;
 
+        var listItem = document.createElement('ol');
+        listItem.textContent = `${initials}: ${time}`;
+
+        highscoresEl.appendChild(listItem);
+    }
 } else {
     highscoresEl.textContent = "No Scores Yet!";
 }
