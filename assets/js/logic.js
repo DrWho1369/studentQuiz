@@ -1,20 +1,62 @@
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-
 import questions from './questions.js';
 
+// Start Screen 
+var startEl = document.querySelector('#start-screen');
+var startButtonEl = document.querySelector('#start');
 
-var startEl = document.querySelector('#start-screen')
-var startButtonEl = document.querySelector('#start')
-var questionsEl = document.querySelector('#questions')
-var timeEl = document.querySelector('#time')
-var questionTitleEl = document.querySelector('#question-title')
-var choicesEl = document.querySelector('#choices')
-var buttonEl = document.
-var count = 0
-// THEN a timer starts and I am presented with a question
-function start(event) {
-    event.preventDefault();
+// Countdown Timer
+var timeEl = document.querySelector('#time');
+
+// Questions
+var questionsEl = document.querySelector('#questions');
+var questionTitleEl = document.querySelector('#question-title');
+var choicesEl = document.querySelector('#choices');
+
+// End Screen
+var endScreenEl = document.querySelector('#end-screen');
+var finalScoreEl = document.querySelector('#final-score');
+var initialsEl = document.querySelector('#initials');
+var submitEl = document.querySelector('#submit');
+
+// Feedback Noises
+var feedbackEl = document.querySelector('#feedback')
+var winSoundEl = document.querySelector('#win-sound');
+var looseSoundEl = document.querySelector('#loose-sound');
+
+// Initialise the timer and intervals
+var timeRemaining = 0;
+var TIME_REMAINING = 100;
+var PENALTY = 5;
+var INTERVAL = 1000;
+
+// Initialise the trackers
+var players_score = 0;
+var questionNumber = 0;
+var currentQuestion = {};
+var correctAnswer = "";
+
+
+
+
+// Quiz
+
+// Resetting everything to baseline
+baselineQuiz() {
+    questionNumber = 0;
+    score = 0;
+    timeRemaining = TIME_REMAINING;
+}
+
+function start() {
+    baselineQuiz();
+    time.textContent = timeLeft;
+    showQuestions();
+    beginTimer();
+}
+
+function beginTimer() {
+    
+}
 
     console.log("started");
 
