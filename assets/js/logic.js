@@ -15,20 +15,25 @@ var feedbackEl = document.querySelector('#feedback')
 var initialsEl = document.querySelector('#initials')
 
 var currentQuestionIndex = 0;
-let score = 0;
-
+var secondsLeft = 60;
+var timerInterval;
 startEl.addEventListener("click", displayQuiz)
 submitEl.addEventListener("click", storeScore)
+
 function displayQuiz() {
     // Step 1 change the CSS
     startScreenEl.classList.add("hide");
     questionsEl.classList.remove("hide")
     questionsEl.classList.add("start")
- 
+    setTime()
+    beginQuestions()
+}
+
+function beginQuestions() {
     var currentQuestion = questions[currentQuestionIndex];
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices;
-
+    
     questionTitleEl.textContent = `Question: ${questionText}`;
     for (let choiceKey in choices) {
         const buttonHTML = `<button>${choiceKey}: ${choices[choiceKey]}</button>`;
@@ -41,8 +46,21 @@ function displayQuiz() {
     })
 }
 
+function setTime() {
+    timerInterval = setInterval(function() {
+        secondsLeft--
+        timeEl.textContent = secondsLeft;
+
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval);
+            endQuiz()
+        }
+    }, 1000)
+}
+
 function handleButtonClick(event) {
     choicesEl.innerHTML = '';
+    
     const selectedChoice = event.target.dataset.choice;
     const currentQuestion = questions[currentQuestionIndex];
     const correctAnswer = currentQuestion.correctAnswer;
@@ -57,12 +75,17 @@ function handleButtonClick(event) {
     currentQuestionIndex++;
 
     if (currentQuestionIndex < questions.length) {
-        displayQuiz();
+        beginQuestions();
     } else {
-        endScreenEl.classList.remove("hide")
-        endScreenEl.classList.add("start")
-        finalScoreEl.textContent = timeEl.textContent
+        endQuiz()
     }
+}
+
+function endQuiz() {
+    endScreenEl.classList.remove("hide")
+    endScreenEl.classList.add("start")
+    finalScoreEl.textContent = timeEl.textContent
+    clearInterval(timerInterval)
 }
 
 function storeScore() {
