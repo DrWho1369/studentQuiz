@@ -2,6 +2,7 @@
 
 ![image](https://github.com/DrWho1369/studentQuiz/assets/125075858/9c750a3d-6e63-4ad4-a499-18170773394b)
 
+[Access Deployed Site](https://drwho1369.github.io/studentQuiz/)
 
 ## Description
 
