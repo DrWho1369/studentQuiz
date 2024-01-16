@@ -1,6 +1,12 @@
+// Importing Questions Array
+
 import questions from './questions.js';
 
-// Step 1 - make the start quiz button display the questions
+
+
+
+// Get elements from HTML
+
 const correctSound = new Audio('./assets/sfx/correct.wav');
 const wrongSound = new Audio('./assets/sfx/incorrect.wav');
 
@@ -16,24 +22,42 @@ var submitEl = document.querySelector('#submit')
 var feedbackEl = document.querySelector('#feedback')
 var initialsEl = document.querySelector('#initials')
 
+
+
+
+// Initiate Some Variables
+
 var currentQuestionIndex = 0;
 var secondsLeft = 30;
 var timerInterval;
 var scoreData = {}
 
+
+
+
+// Add Event Listeners
+
 startEl.addEventListener("click", displayQuiz)
 submitEl.addEventListener("click", storeScore)
 
+
+
+
+// Define Functions For Program
+
 function displayQuiz() {
-    // Step 1 change the CSS
+
     startScreenEl.classList.add("hide");
     questionsEl.classList.remove("hide")
     questionsEl.classList.add("start")
+
     setTime()
     beginQuestions()
 }
 
+
 function beginQuestions() {
+
     var currentQuestion = questions[currentQuestionIndex];
     var questionText = currentQuestion.question;
     var choices = currentQuestion.choices;
@@ -49,11 +73,13 @@ function beginQuestions() {
     buttons.forEach(button => {
         button.addEventListener('click', handleButtonClick);
     })
-    console.log(buttons)
 }
 
+
 function setTime() {
+
     timerInterval = setInterval(function() {
+
         secondsLeft--
         timeEl.textContent = secondsLeft;
 
@@ -61,20 +87,20 @@ function setTime() {
             clearInterval(timerInterval);
             endQuiz()
         }
-
-        
     }, 1000)
 }
 
+
 function handleButtonClick(event) {
+
     choicesEl.innerHTML = '';
     feedbackEl.textContent = ''
+
     const selectedChoice = event.target.firstChild.data[0];
-    console.log(selectedChoice)
+
     const currentQuestion = questions[currentQuestionIndex];
 
     const correctAnswer = currentQuestion.correctAnswer;
-
 
     if (selectedChoice === correctAnswer) {
         
@@ -82,7 +108,6 @@ function handleButtonClick(event) {
         feedbackEl.classList.add("start")
         feedbackEl.textContent = 'Correct!';
         correctSound.play();
-
 
     } else {
         secondsLeft -= 5;
@@ -95,10 +120,9 @@ function handleButtonClick(event) {
         if (secondsLeft < 0) {
             secondsLeft = 0;
             timeEl.textContent = secondsLeft;
-            endQuiz()
-            
-            
+            endQuiz()   
         }
+
         timeEl.style.color = 'red';
         timeEl.style.fontSize = '200%';
         
@@ -117,27 +141,33 @@ function handleButtonClick(event) {
     }
 }
 
+
 function endQuiz() {
-   
+
     questionsEl.classList.add("hide");
     endScreenEl.classList.remove("hide");
     endScreenEl.classList.add("start");
+
     finalScoreEl.textContent = timeEl.textContent;
-    clearInterval(timerInterval);
-    
+    clearInterval(timerInterval);    
 }
 
+
 function storeScore() {
+
     var newScore = {
         initials: initialsEl.value,
         time: timeEl.textContent
     };
+
     if (!scoreData.hasOwnProperty("score")) {
         scoreData.score = [];
     }
+
     scoreData.score.push(newScore);
     var jsonString = JSON.stringify(scoreData);
     localStorage.setItem('scoreData', jsonString)
+
     endScreenEl.classList.add("hide")
     startScreenEl.classList.remove("hide");
     startScreenEl.classList.add("start");
