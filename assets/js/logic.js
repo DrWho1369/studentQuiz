@@ -57,6 +57,8 @@ function setTime() {
             clearInterval(timerInterval);
             endQuiz()
         }
+
+        
     }, 1000)
 }
 
@@ -69,14 +71,20 @@ function handleButtonClick(event) {
 
     if (selectedChoice === correctAnswer) {
         console.log(score)
+
     } else {
         secondsLeft -= 5;
-
-        timeEl.style.color = 'red';
-        timeEl.style.fontSize = '200%';
         if (secondsLeft < 0) {
             secondsLeft = 0;
+            timeEl.textContent = secondsLeft;
+            endQuiz()
+            
+            
         }
+        timeEl.style.color = 'red';
+        timeEl.style.fontSize = '200%';
+        
+        
         setTimeout(() => {
             timeEl.style.color = ''; 
             timeEl.style.fontSize = '';
@@ -93,11 +101,13 @@ function handleButtonClick(event) {
 }
 
 function endQuiz() {
-    questionsEl.classList.add("hide")
-    endScreenEl.classList.remove("hide")
-    endScreenEl.classList.add("start")
-    finalScoreEl.textContent = timeEl.textContent
-    clearInterval(timerInterval)
+   
+    questionsEl.classList.add("hide");
+    endScreenEl.classList.remove("hide");
+    endScreenEl.classList.add("start");
+    finalScoreEl.textContent = timeEl.textContent;
+    clearInterval(timerInterval);
+    
 }
 
 function storeScore() {
