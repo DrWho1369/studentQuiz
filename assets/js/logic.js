@@ -71,12 +71,17 @@ function handleButtonClick(event) {
         console.log(score)
     } else {
         secondsLeft -= 5;
-
+        timeEl.style.color = 'red';
+        timeEl.style.fontSize = '200%';
         if (secondsLeft < 0) {
             secondsLeft = 0;
         }
+        setTimeout(() => {
+            timeEl.style.color = ''; 
+            timeEl.style.fontSize = '';
+        }, 1000);
     }
-
+    
     currentQuestionIndex++;
 
     if (currentQuestionIndex < questions.length) {
@@ -105,5 +110,5 @@ function storeScore() {
     scoreData.score.push(newScore);
     var jsonString = JSON.stringify(scoreData);
     localStorage.setItem('scoreData', jsonString)
-
+    endScreenEl.classList.remove("hide")
 }
