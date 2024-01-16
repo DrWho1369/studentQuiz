@@ -71,6 +71,7 @@ function handleButtonClick(event) {
         console.log(score)
     } else {
         secondsLeft -= 5;
+
         timeEl.style.color = 'red';
         timeEl.style.fontSize = '200%';
         if (secondsLeft < 0) {
@@ -110,5 +111,7 @@ function storeScore() {
     scoreData.score.push(newScore);
     var jsonString = JSON.stringify(scoreData);
     localStorage.setItem('scoreData', jsonString)
-    endScreenEl.classList.remove("hide")
+    endScreenEl.classList.add("hide")
+    startScreenEl.classList.remove("hide");
+    startScreenEl.classList.add("start");
 }
