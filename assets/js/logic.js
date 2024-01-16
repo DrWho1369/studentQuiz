@@ -1,6 +1,8 @@
 import questions from './questions.js';
 
 // Step 1 - make the start quiz button display the questions
+const correctSound = new Audio('./assets/sfx/correct.wav');
+const wrongSound = new Audio('./assets/sfx/incorrect.wav');
 
 var startEl = document.querySelector('#start')
 var startScreenEl = document.querySelector('#start-screen')
@@ -66,7 +68,7 @@ function setTime() {
 
 function handleButtonClick(event) {
     choicesEl.innerHTML = '';
-    
+    feedbackEl.textContent = ''
     const selectedChoice = event.target.firstChild.data[0];
     console.log(selectedChoice)
     const currentQuestion = questions[currentQuestionIndex];
@@ -76,16 +78,19 @@ function handleButtonClick(event) {
 
     if (selectedChoice === correctAnswer) {
         
-        const pTag = document.createElement('p');
-        pTag.textContent = 'Correct!';
-        choicesEl.insertAdjacentElement('afterend', pTag);
+        feedbackEl.classList.remove("hide");
+        feedbackEl.classList.add("start")
+        feedbackEl.textContent = 'Correct!';
+        correctSound.play();
+
 
     } else {
         secondsLeft -= 5;
 
-        const pTag = document.createElement('p');
-        pTag.textContent = 'Wrong!';
-        choicesEl.insertAdjacentElement('afterend', pTag);
+        feedbackEl.classList.remove("hide");
+        feedbackEl.classList.add("start")
+        feedbackEl.textContent = 'Wrong!';
+        wrongSound.play();
 
         if (secondsLeft < 0) {
             secondsLeft = 0;
