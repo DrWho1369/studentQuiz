@@ -57,7 +57,7 @@ Code Quiz is a web application that provides a timed quiz on JavaScript fundamen
 
 ## Credits
 
-This project was developed as part of the web development curriculum. Special thanks to the instructors and fellow learners for their contributions.
+This project was developed as part of the web development curriculum. Special thanks to the instructors for their guidance.
 
 ## License
 
